@@ -46,8 +46,8 @@ function HomeNavbar() {
             </Dropdown.Item>
           </DropdownButton>
 
-          <Button variant="primary" onClick={() => navigate("/login")}>
-            Log out
+          <Button variant="danger" onClick={() => navigate("/login")}>
+            Log out <i class="fa-solid fa-right-from-bracket"></i>
           </Button>
         </Container>
       </Navbar>

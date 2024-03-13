@@ -9,7 +9,7 @@ const containerStyle = {
 function MapsComponent({ locationPickBool, longitude, latitude }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "",
+    googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const [center, setCenter] = useState({ lat: 28.6024, lng: -81.2001 });
@@ -35,7 +35,7 @@ function MapsComponent({ locationPickBool, longitude, latitude }) {
         console.log("Geolocation is not supported by this browser.");
       }
     } else {
-      setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
+      setCenter({ lat: parseFloat(longitude), lng: parseFloat(latitude) });
     }
   }, [locationPickBool, latitude, longitude]);
 

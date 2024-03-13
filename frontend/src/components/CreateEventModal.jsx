@@ -56,7 +56,7 @@ function CreateEventModal({ show, onHide }) {
               <Form.Control type="text" placeholder="Enter email" />
             </Form.Group>
           </Form>
-          <Form.Label>Choose an event location</Form.Label>
+          <Form.Label>Click to choose an event location</Form.Label>
           <MapsComponent locationPickBool={true} />
         </Modal.Body>
         <Modal.Footer>

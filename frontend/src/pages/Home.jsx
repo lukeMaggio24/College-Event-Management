@@ -4,12 +4,11 @@ import HomeNavbar from "../components/HomeNavbar";
 import EventCard from "../components/EventCard";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import MapsComponent from "../components/MapsComponent";
 
 // todo
-// fix maps Component when called from eventcard and location is given already
 // write functions for form submission
 // make prettier
+// fix collapse sharing state between EventCards
 
 // fake list of events
 const events = [
@@ -74,6 +73,7 @@ function Home() {
         {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
+            id={event.id}
             name={event.name}
             visibility={event.visibility}
             category={event.category}

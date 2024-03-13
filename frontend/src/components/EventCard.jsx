@@ -4,8 +4,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Collapse from "react-bootstrap/Collapse";
 import Button from "react-bootstrap/Button";
 import MapsComponent from "./MapsComponent";
+import Accordion from "react-bootstrap/Accordion";
 
 function EventCard({
+  id,
   name,
   visibility,
   category,
@@ -18,36 +20,34 @@ function EventCard({
   locationLongitude,
   locationLatitude,
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Local state for each card
 
   return (
-    <Card style={{ width: "100%", marginBottom: "2rem" }}>
+    <Card style={{ width: "30rem", margin: "1rem" }}>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
-        <Card.Text>Date: {date}</Card.Text>
-        <Card.Text>Start Time: {starttime}</Card.Text>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>Visibility: {visibility}</ListGroup.Item>
-        <ListGroup.Item>Category: {category}</ListGroup.Item>
-      </ListGroup>
-      <Card.Body>
+        <Card.Subtitle>
+          {visibility}, {category}
+        </Card.Subtitle>
+        <Card.Text style={{ marginTop: "0.4rem" }}>{description}</Card.Text>
+        <Card.Text>
+          Date: {date} @ {starttime} UTC
+        </Card.Text>
         <Card.Text>Contact Phone: {contactphone}</Card.Text>
-        <Card.Text>Contact Email: {contactemail}</Card.Text>
         <Card.Text>Contact Email: {contactemail}</Card.Text>
         <Card.Text>
           Location: {locationName} , {locationLongitude}, {locationLatitude}
         </Card.Text>
         <Button
+          variant="secondary"
           onClick={() => setOpen(!open)}
-          aria-controls="example-collapse-text"
+          aria-controls={id}
           aria-expanded={open}
         >
           Show/Hide Map
         </Button>
         <Collapse in={open}>
-          <div id="example-collapse-text">
+          <div id={id}>
             <MapsComponent
               locationPickBool={false}
               longitude={locationLongitude}
