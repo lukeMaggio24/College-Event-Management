@@ -4,9 +4,12 @@ import HomeNavbar from "../components/HomeNavbar";
 import EventCard from "../components/EventCard";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import MapsComponent from "../components/MapsComponent";
 
 // todo
-// add location to create event modal and event card
+// fix maps Component when called from eventcard and location is given already
+// write functions for form submission
+// make prettier
 
 // fake list of events
 const events = [
@@ -20,10 +23,13 @@ const events = [
     starttime: "12:00",
     contactphone: "123-456-7890",
     contactemail: "coolman@ucf.edu",
+    locationName: "UCF",
+    locationLongitude: "28.6024",
+    locationLatitude: "-81.2001",
   },
   {
     id: 2,
-    name: "Hack@UCF",
+    name: "Hack@USF",
     visibility: "RSO Event",
     category: "Social",
     description: "come to the bowling alley and bowl",
@@ -31,6 +37,9 @@ const events = [
     starttime: "12:01",
     contactphone: "123-456-7890",
     contactemail: "jeffdude@ucf.edu",
+    locationName: "USF",
+    locationLongitude: "28.06385",
+    locationLatitude: "-82.41333",
   },
   // Add more events as needed
 ];
@@ -73,6 +82,9 @@ function Home() {
             starttime={event.starttime}
             contactphone={event.contactphone}
             contactemail={event.contactemail}
+            locationName={event.locationName}
+            locationLongitude={event.locationLongitude}
+            locationLatitude={event.locationLatitude}
           />
         ))}
       </div>

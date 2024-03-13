@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Collapse from "react-bootstrap/Collapse";
+import Button from "react-bootstrap/Button";
+import MapsComponent from "./MapsComponent";
 
 function EventCard({
   name,
@@ -11,9 +14,14 @@ function EventCard({
   starttime,
   contactphone,
   contactemail,
+  locationName,
+  locationLongitude,
+  locationLatitude,
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Card style={{ width: "100rem", marginBottom: "2rem" }}>
+    <Card style={{ width: "100%", marginBottom: "2rem" }}>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{description}</Card.Text>
@@ -27,6 +35,26 @@ function EventCard({
       <Card.Body>
         <Card.Text>Contact Phone: {contactphone}</Card.Text>
         <Card.Text>Contact Email: {contactemail}</Card.Text>
+        <Card.Text>Contact Email: {contactemail}</Card.Text>
+        <Card.Text>
+          Location: {locationName} , {locationLongitude}, {locationLatitude}
+        </Card.Text>
+        <Button
+          onClick={() => setOpen(!open)}
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+        >
+          Show/Hide Map
+        </Button>
+        <Collapse in={open}>
+          <div id="example-collapse-text">
+            <MapsComponent
+              locationPickBool={false}
+              longitude={locationLongitude}
+              latitude={locationLatitude}
+            />
+          </div>
+        </Collapse>
       </Card.Body>
     </Card>
   );

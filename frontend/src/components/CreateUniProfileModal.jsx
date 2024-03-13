@@ -32,6 +32,9 @@ function CreateUniProfileModal({ show, onHide }) {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
+          <Button variant="primary" type="submit" form="my-form">
+            Submit
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

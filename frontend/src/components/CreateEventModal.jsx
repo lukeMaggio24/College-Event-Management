@@ -3,6 +3,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import MapsComponent from "./MapsComponent";
 
 function CreateEventModal({ show, onHide }) {
   const [startDate, setStartDate] = useState(new Date());
@@ -55,10 +56,15 @@ function CreateEventModal({ show, onHide }) {
               <Form.Control type="text" placeholder="Enter email" />
             </Form.Group>
           </Form>
+          <Form.Label>Choose an event location</Form.Label>
+          <MapsComponent locationPickBool={true} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
             Close
+          </Button>
+          <Button variant="primary" type="submit" form="my-form">
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
