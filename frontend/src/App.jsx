@@ -6,6 +6,15 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/customers')
+      .then(response => response.json())
+      .then(data => setCustomers(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
+  
   return (
     <>
       <div>

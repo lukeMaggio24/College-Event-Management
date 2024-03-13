@@ -1,7 +1,7 @@
 // Import required modules
 const express = require('express');
 const dotenv = require('dotenv');
-const dbConfig = require('./database');
+const customersRoute = require('./routes/data.js'); // Import the route from data.js
 
 // Load environment variables from .env file
 dotenv.config();
@@ -9,10 +9,8 @@ dotenv.config();
 // Create an Express application
 const app = express();
 
-// Define a route
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+// Use the /customers route from data.js
+app.use('/customers', customersRoute);
 
 // Start the server
 const PORT = 3000;
