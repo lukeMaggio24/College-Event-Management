@@ -11,7 +11,6 @@ import CreateUniProfileModal from "../components/CreateUniProfileModal"; // Adju
 import CreateEventModal from "../components/CreateEventModal";
 import RequestJoinRsoModal from "../components/RequestJoinRsoModal";
 import RequestCreateRsoModal from "../components/RequestCreateRsoModal";
-import Form from "react-bootstrap/Form";
 
 function HomeNavbar() {
   const navigate = useNavigate();
@@ -21,13 +20,19 @@ function HomeNavbar() {
   const [showRequestJoinRsoModal, setShowRequestJoinRsoModal] = useState(false);
   const [showRequestCreateRsoModal, setShowRequestCreateRsoModal] =
     useState(false);
+
+  const role = localStorage.getItem("role");
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand>ID: </Navbar.Brand>
+          <Navbar.Brand>
+            ID: {localStorage.getItem("email")}, Role:{" "}
+            {localStorage.getItem("role")}
+          </Navbar.Brand>
 
-          <DropdownButton id="dropdown-basic-button" title="User">
+          <DropdownButton id="dropdown-basic-button" title="Student">
             <Dropdown.Item onClick={() => setShowRequestJoinRsoModal(true)}>
               Request to join RSO
             </Dropdown.Item>
@@ -35,13 +40,21 @@ function HomeNavbar() {
               Request to create RSO
             </Dropdown.Item>
           </DropdownButton>
+
           <DropdownButton id="dropdown-basic-button" title="Admin">
-            <Dropdown.Item onClick={() => setShowCreateEventModal(true)}>
+            <Dropdown.Item
+              onClick={() => setShowCreateEventModal(true)}
+              disabled={role !== "Admin" && role !== "Super Admin"}
+            >
               Create Event
             </Dropdown.Item>
           </DropdownButton>
+
           <DropdownButton id="dropdown-basic-button" title="S Admin">
-            <Dropdown.Item onClick={() => setShowCreateUniProfileModal(true)}>
+            <Dropdown.Item
+              onClick={() => setShowCreateUniProfileModal(true)}
+              disabled={role !== "Super Admin"}
+            >
               Create Uni Profile
             </Dropdown.Item>
           </DropdownButton>
