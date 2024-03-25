@@ -1,19 +1,26 @@
 // Import required modules
-const express = require('express');
-const dotenv = require('dotenv');
-const customersRoute = require('./routes/data.js'); // Import the route from data.js
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const db = require("./database");
 
 // Load environment variables from .env file
 dotenv.config();
 
 // Create an Express application
 const app = express();
-
-// Use the /customers route from data.js
-app.use('/customers', customersRoute);
+app.use(cors()); // Use cors middleware
+app.use(express.json());
 
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+const signupRoute = require("./routes/signup.js");
+const loginRoute = require("./routes/login.js");
+app.use("/signup", signupRoute);
+app.use("/login", loginRoute);
+
+module.exports = db;

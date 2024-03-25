@@ -1,4 +1,3 @@
-const express = require('express');
 const mysql = require('mysql2');
 const dbConfig = require('../database.js');
 
@@ -8,19 +7,17 @@ const pool = mysql.createPool(dbConfig);
 // Get a promise-based instance of the pool
 const promisePool = pool.promise();
 
-// Create an Express router
-const router = express.Router();
+// Query to fetch the first_name column from the customers table
+const query = 'SELECT first_name FROM customers';
 
-// Define a route to fetch the first_name column from the customers table
-router.get('/firstname', async (req, res) => {
-  try {
-    const query = 'SELECT first_name FROM customers';
-    const [rows, fields] = await promisePool.query(query);
-    res.json(rows.map(row => row.first_name));
-  } catch (error) {
+// Execute the query
+promisePool.query(query)
+  .then(([rows, fields]) => {
+    // 'rows' contains the rows returned by the query
+    rows.forEach(row => {
+      console.log(row.first_name);
+    });
+  })
+  .catch(error => {
     console.error('Error fetching first names:', error);
-    res.status(500).send('Server error');
-  }
-});
-
-module.exports = router;
+  });
