@@ -48,6 +48,12 @@ function HomeNavbar() {
             >
               Create Event
             </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => setShowCreateEventModal(true)}
+              disabled={role !== "Admin" && role !== "Super Admin"}
+            >
+              View Requests to join RSO
+            </Dropdown.Item>
           </DropdownButton>
 
           <DropdownButton id="dropdown-basic-button" title="S Admin">
@@ -56,6 +62,12 @@ function HomeNavbar() {
               disabled={role !== "Super Admin"}
             >
               Create Uni Profile
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => setShowCreateUniProfileModal(true)}
+              disabled={role !== "Super Admin"}
+            >
+              View Requests to create RSO
             </Dropdown.Item>
           </DropdownButton>
 

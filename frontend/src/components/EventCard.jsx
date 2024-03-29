@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Collapse from "react-bootstrap/Collapse";
-import Button from "react-bootstrap/Button";
 import MapsComponent from "./MapsComponent";
-import Accordion from "react-bootstrap/Accordion";
 
 function EventCard({
   id,
@@ -20,8 +16,6 @@ function EventCard({
   locationLongitude,
   locationLatitude,
 }) {
-  const [open, setOpen] = useState(false); // Local state for each card
-
   return (
     <Card style={{ width: "30rem", margin: "1rem" }}>
       <Card.Body>
@@ -38,23 +32,11 @@ function EventCard({
         <Card.Text>
           Location: {locationName} , {locationLongitude}, {locationLatitude}
         </Card.Text>
-        <Button
-          variant="secondary"
-          onClick={() => setOpen(!open)}
-          aria-controls={id}
-          aria-expanded={open}
-        >
-          Show/Hide Map
-        </Button>
-        <Collapse in={open}>
-          <div id={id}>
-            <MapsComponent
-              locationPickBool={false}
-              longitude={locationLongitude}
-              latitude={locationLatitude}
-            />
-          </div>
-        </Collapse>
+        <MapsComponent
+          locationPickBool={false}
+          longitude={locationLongitude}
+          latitude={locationLatitude}
+        />
       </Card.Body>
     </Card>
   );

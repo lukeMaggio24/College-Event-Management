@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 
 // todo
 // write functions for form submission
-// make prettier
 // fix collapse sharing state between EventCards
 
 // fake list of events

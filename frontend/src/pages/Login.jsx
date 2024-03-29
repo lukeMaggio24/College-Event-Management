@@ -38,8 +38,7 @@ function Login() {
       localStorage.setItem("email", email);
       localStorage.setItem("role", data.role);
     } else {
-      const errorData = await response.json();
-      setErrorMessage(errorData.message);
+      setErrorMessage(data.message);
       setShowAlert(true);
     }
   };
