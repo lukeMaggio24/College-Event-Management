@@ -72,7 +72,7 @@ function HomeNavbar() {
           </DropdownButton>
 
           <Button variant="danger" onClick={() => navigate("/login")}>
-            Log out <i class="fa-solid fa-right-from-bracket"></i>
+            Log out <i className="fa-solid fa-right-from-bracket"></i>
           </Button>
         </Container>
       </Navbar>

@@ -35,11 +35,13 @@ function EventCard({
         <Card.Text>
           Location: {locationName} , {locationLongitude}, {locationLatitude}
         </Card.Text>
-        <MapsComponent
-          locationPickBool={false}
-          longitude={locationLongitude}
-          latitude={locationLatitude}
-        />
+        {locationLongitude && locationLatitude && (
+          <MapsComponent
+            locationPickBool={false}
+            longitude={locationLongitude}
+            latitude={locationLatitude}
+          />
+        )}
       </Card.Body>
     </Card>
   );

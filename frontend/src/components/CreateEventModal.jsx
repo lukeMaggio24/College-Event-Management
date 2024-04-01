@@ -6,9 +6,22 @@ import "react-datepicker/dist/react-datepicker.css";
 import MapsComponent from "./MapsComponent";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useEffect } from "react";
+import { Alert } from "react-bootstrap";
 
 function CreateEventModal({ show, onHide }) {
   const [startDate, setStartDate] = useState(new Date());
+  const [eventName, setEventName] = useState("");
+  const [eventCategory, setEventCategory] = useState("");
+  const [eventVisibility, setEventVisibility] = useState("");
+  const [description, setDescription] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  // implement long and lat here
+
+  // state for error handling
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   // on page load, fetch unis from dropdown
   const [universities, setUniversities] = useState([]);
@@ -25,12 +38,63 @@ function CreateEventModal({ show, onHide }) {
     fetchUniversities();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      !selectedUniversity ||
+      !eventName ||
+      !eventCategory ||
+      !eventVisibility ||
+      !description ||
+      !startTime ||
+      !contactPhone ||
+      !contactEmail
+    ) {
+      setErrorMessage("Please make sure all fields are filled out correctly.");
+      setShowAlert(true);
+      return;
+    }
+
+    const event = {
+      university_name: selectedUniversity,
+      event_name: eventName,
+      event_category: eventCategory,
+      event_visibility: eventVisibility,
+      description: description,
+      date: startDate,
+      time: startTime,
+      contact_phone: contactPhone,
+      contact_email: contactEmail,
+
+      // Add other fields as needed
+    };
+
+    const response = await fetch("http://localhost:3000/createevent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      onHide();
+      window.location.reload();
+    } else {
+      setErrorMessage(data.message);
+      setShowAlert(true);
+    }
+  };
+
   return (
     <>
       <Modal size="lg" show={show} onHide={onHide}>
         <Modal.Header closeButton>
           <Modal.Title>Create an event</Modal.Title>
         </Modal.Header>
+        {showAlert && <Alert variant="danger">{errorMessage}</Alert>}
         <Modal.Body>
           {" "}
           <Form>
@@ -50,15 +114,19 @@ function CreateEventModal({ show, onHide }) {
             </DropdownButton>
             <Form.Group className="mb-3">
               <Form.Label>Event Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter name of RSO" />
+              <Form.Control
+                type="text"
+                placeholder="Enter name of RSO"
+                onChange={(e) => setEventName(e.target.value)}
+              />
             </Form.Group>
-            <Form.Select>
+            <Form.Select onChange={(e) => setEventCategory(e.target.value)}>
               <option>Event Category</option>
               <option>Social</option>
               <option>Fundraising</option>
               <option>Tech Talk</option>
             </Form.Select>
-            <Form.Select>
+            <Form.Select onChange={(e) => setEventVisibility(e.target.value)}>
               <option>Event Visibility</option>
               <option>Public</option>
               <option>Private</option>
@@ -66,26 +134,43 @@ function CreateEventModal({ show, onHide }) {
             </Form.Select>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </Form.Group>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-            />
+            <Form.Group>
+              <Form.Label>Event Date</Form.Label>
+              <br></br>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Start Time</Form.Label>
-              <Form.Control type="text" placeholder="Enter a time UTC" />
+              <Form.Control
+                type="text"
+                placeholder="Enter a time UTC"
+                onChange={(e) => setStartTime(e.target.value)}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Contact Phone</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter phone xxx-xxx-xxxx"
+                onChange={(e) => setContactPhone(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Contact Email</Form.Label>
-              <Form.Control type="text" placeholder="Enter email" />
+              <Form.Control
+                type="text"
+                placeholder="Enter email"
+                onChange={(e) => setContactEmail(e.target.value)}
+              />
             </Form.Group>
           </Form>
           <Form.Label>Click to choose an event location</Form.Label>
@@ -95,7 +180,12 @@ function CreateEventModal({ show, onHide }) {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
-          <Button variant="primary" type="submit" form="my-form">
+          <Button
+            variant="primary"
+            type="submit"
+            form="my-form"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Modal.Footer>

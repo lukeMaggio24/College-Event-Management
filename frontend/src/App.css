@@ -16,6 +16,11 @@ form{
   width: 30vw;
 }
 
+.center-horizontally{
+  display: flex;
+  justify-content: center;
+}
+
 .loginSignupForm{
   width: 50%;
   margin-top: 5vh;
