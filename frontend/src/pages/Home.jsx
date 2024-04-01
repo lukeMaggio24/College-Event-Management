@@ -4,6 +4,8 @@ import HomeNavbar from "../components/HomeNavbar";
 import EventCard from "../components/EventCard";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Dropdown } from "react-bootstrap";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 // todo
 // write functions for form submission
@@ -13,6 +15,7 @@ import Button from "react-bootstrap/Button";
 const events = [
   {
     id: 1,
+    university: "UCF",
     name: "Knight Hacks",
     visibility: "public",
     category: "tech talk",
@@ -27,6 +30,7 @@ const events = [
   },
   {
     id: 2,
+    university: "USF",
     name: "Hack@USF",
     visibility: "RSO Event",
     category: "Social",
@@ -39,40 +43,124 @@ const events = [
     locationLongitude: "28.06385",
     locationLatitude: "-82.41333",
   },
+  {
+    id: 3,
+    university: "UF",
+    name: "Hack@UF",
+    visibility: "RSO Event",
+    category: "Social",
+    description: "testtestset",
+    date: "2026-01-01",
+    starttime: "12:01",
+    contactphone: "123-456-7890",
+    contactemail: "jeffdude@ucf.edu",
+    locationName: "UF",
+    locationLongitude: "28.06385",
+    locationLatitude: "-82.41333",
+  },
+  {
+    id: 4,
+    university: "FSU",
+    name: "Hack@Nole",
+    visibility: "RSO Event",
+    category: "Social",
+    description: "comeGO NOLESwl",
+    date: "2026-01-01",
+    starttime: "12:01",
+    contactphone: "123-456-7890",
+    contactemail: "jeffdude@ucf.edu",
+    locationName: "USF",
+    locationLongitude: "28.06385",
+    locationLatitude: "-82.41333",
+  },
+  {
+    id: 5,
+    university: "FIU",
+    name: "Hack@FIU",
+    visibility: "RSO Event",
+    category: "Social",
+    description: "owls?",
+    date: "2026-01-01",
+    starttime: "12:01",
+    contactphone: "123-456-7890",
+    contactemail: "jeffdude@ucf.edu",
+    locationName: "USF",
+    locationLongitude: "28.06385",
+    locationLatitude: "-82.41333",
+  },
   // Add more events as needed
 ];
 
 function Home() {
+  // filter events based on search term
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredEvents, setFilteredEvents] = useState(events);
-
+  const [selectedUniversity, setSelectedUniversity] = useState(
+    "Choose a University"
+  );
   useEffect(() => {
     setFilteredEvents(
-      events.filter((event) =>
-        event.name.toLowerCase().includes(searchTerm.toLowerCase())
+      events.filter(
+        (event) =>
+          event.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          event.university === selectedUniversity
       )
     );
-  }, [searchTerm, events]);
+  }, [searchTerm, events, selectedUniversity]);
+
+  // on page load, fetch unis from dropdown
+  const [universities, setUniversities] = useState([]);
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      const response = await fetch("http://localhost:3000/fetchunis");
+      const data = await response.json();
+      setUniversities(data);
+    };
+
+    fetchUniversities();
+  }, []);
 
   return (
     <div>
       <HomeNavbar />
-      <Form className="d-flex" id="searchBar">
-        <Form.Control
-          type="search"
-          placeholder="Search Events"
-          className="me-2"
-          aria-label="Search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
+      <div className="parent-div">
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <DropdownButton
+            id="dropdown-basic-button"
+            title={selectedUniversity}
+            className="mr-2"
+          >
+            {universities.map((university) => (
+              <Dropdown.Item
+                key={university.id}
+                onClick={() => setSelectedUniversity(university.name)}
+              >
+                {university.name}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+          <Form className="d-flex">
+            <Form.Control
+              id="searchBar"
+              type="search"
+              placeholder="Search Events"
+              className="me-2"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+        </div>
+      </div>
+
       <div className="event-card-container">
         {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
             id={event.id}
+            university={event.university}
             name={event.name}
             visibility={event.visibility}
             category={event.category}

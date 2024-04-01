@@ -4,6 +4,7 @@ import MapsComponent from "./MapsComponent";
 
 function EventCard({
   id,
+  university,
   name,
   visibility,
   category,
@@ -19,7 +20,9 @@ function EventCard({
   return (
     <Card style={{ width: "30rem", margin: "1rem" }}>
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>
+          {name}, {university}
+        </Card.Title>
         <Card.Subtitle>
           {visibility}, {category}
         </Card.Subtitle>

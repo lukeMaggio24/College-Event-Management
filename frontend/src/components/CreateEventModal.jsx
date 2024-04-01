@@ -4,9 +4,27 @@ import DatePicker from "react-datepicker";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import MapsComponent from "./MapsComponent";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useEffect } from "react";
 
 function CreateEventModal({ show, onHide }) {
   const [startDate, setStartDate] = useState(new Date());
+
+  // on page load, fetch unis from dropdown
+  const [universities, setUniversities] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState(
+    "Choose a University"
+  );
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      const response = await fetch("http://localhost:3000/fetchunis");
+      const data = await response.json();
+      setUniversities(data);
+    };
+
+    fetchUniversities();
+  }, []);
+
   return (
     <>
       <Modal size="lg" show={show} onHide={onHide}>
@@ -16,6 +34,20 @@ function CreateEventModal({ show, onHide }) {
         <Modal.Body>
           {" "}
           <Form>
+            <DropdownButton
+              id="dropdown-basic-button"
+              title={selectedUniversity}
+              className="mr-2"
+            >
+              {universities.map((university) => (
+                <Dropdown.Item
+                  key={university.id}
+                  onClick={() => setSelectedUniversity(university.name)}
+                >
+                  {university.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
             <Form.Group className="mb-3">
               <Form.Label>Event Name</Form.Label>
               <Form.Control type="text" placeholder="Enter name of RSO" />
