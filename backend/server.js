@@ -20,7 +20,11 @@ app.listen(PORT, () => {
 
 const signupRoute = require("./routes/signup.js");
 const loginRoute = require("./routes/login.js");
+const createUniRoute = require("./routes/createuni.js");
+const fetchUniRoute = require("./routes/fetchunis.js");
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
+app.use("/createuni", createUniRoute);
+app.use("/fetchunis", fetchUniRoute);
 
 module.exports = db;

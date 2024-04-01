@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require("../database");
 
 router.post("/", (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
-  const query = "INSERT INTO users (email, password) VALUES (?, ?)";
-  const values = [email, password];
+  const query = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
+  const values = [email, password, role];
 
   db.query(query, values, (error, results, fields) => {
     if (error) {
