@@ -1,3 +1,11 @@
+# TODO
+- table for rso_join_requests (implementation will be similar to rso_create_requests).<br>
+- create a Student modal to request to join an RSO, where that request is put into the database mentioned above.<br>
+- create a Admin modal similar to ViewRsoCreateRequests.jsx to show students' requests to join an RSO.<br>
+- table to store an RSO and its users.<br>
+- (why do we need to track the users in an RSO?)<br>
+<br>
+
 # College-Event-Management
 Allows for Universities to create university profiles. RSO owners to create events and for students to attend these events. These events can have various attributes such as public or private. With a google maps type of image for these locations as well a rating system.
 <br>
