@@ -11,6 +11,7 @@ import CreateUniProfileModal from "../components/CreateUniProfileModal"; // Adju
 import CreateEventModal from "../components/CreateEventModal";
 import RequestJoinRsoModal from "../components/RequestJoinRsoModal";
 import RequestCreateRsoModal from "../components/RequestCreateRsoModal";
+import ViewRsoCreateRequests from "./ViewRsoCreateRequests";
 
 function HomeNavbar() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function HomeNavbar() {
   const [showRequestJoinRsoModal, setShowRequestJoinRsoModal] = useState(false);
   const [showRequestCreateRsoModal, setShowRequestCreateRsoModal] =
     useState(false);
+  const [showViewRsoCreateRequests, setShowViewRsoCreateRequests] = useState(false);
 
   const role = localStorage.getItem("role");
 
@@ -64,7 +66,7 @@ function HomeNavbar() {
               Create Uni Profile
             </Dropdown.Item>
             <Dropdown.Item
-              onClick={() => setShowCreateUniProfileModal(true)}
+              onClick={() => setShowViewRsoCreateRequests(true)}
               disabled={role !== "Super Admin"}
             >
               View Requests to create RSO
@@ -91,6 +93,10 @@ function HomeNavbar() {
       <CreateUniProfileModal
         show={showCreateUniProfileModal}
         onHide={() => setShowCreateUniProfileModal(false)}
+      />
+      <ViewRsoCreateRequests
+        show={showViewRsoCreateRequests}
+        onHide={() => setShowViewRsoCreateRequests(false)}
       />
     </div>
   );
