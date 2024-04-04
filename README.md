@@ -1,8 +1,9 @@
-# TODO
+# TODO:
 - table for rso_join_requests (implementation will be similar to rso_create_requests).<br>
 - users table should be 3 seperate tables for student, admin, and super admin <br>
 - comment and rating system for events?<br>
 - ER diagram and relational schema<br>
+- bcrypt password encryption<br>
 - add ratings float to events table<br>
 - add boolean for RSO table to see if that is true ( > 5 students means active)<br>
 - create a Student modal to request to join an RSO, where that request is put into the database mentioned above.<br>
