@@ -74,6 +74,7 @@ CREATE TABLE RSO (
 rso_id INT AUTO_INCREMENT PRIMARY KEY,
 rso_owner VARCHAR(255),
 numOfMembers INT,
+active BOOLEAN,
 university_id INT,
 FOREIGN KEY (university_id) REFERENCES universities(id)
 );
