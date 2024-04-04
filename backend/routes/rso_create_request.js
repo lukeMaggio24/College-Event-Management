@@ -3,11 +3,11 @@ const router = express.Router();
 const db = require("../database");
 
 router.post("/", (req, res) => {
-  const { user_id, rso_name, administrator_email, emails } = req.body;
+  const { user_id, rso_name, administrator_email, emails, UNI_ID } = req.body;
 
   const query =
-    "INSERT INTO rso_create_requests (user_id, rso_name, administrator_email, emails) VALUES (?, ?, ?, ?)";
-  const values = [user_id, rso_name, administrator_email, emails];
+    "INSERT INTO rso_create_requests (user_id, rso_name, administrator_email, emails, UNI_ID) VALUES (?, ?, ?, ?, ?)";
+  const values = [user_id, rso_name, administrator_email, emails, UNI_ID];
 
   db.query(query, values, (error, results, fields) => {
     if (error) {

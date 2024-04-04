@@ -6,23 +6,35 @@ function RequestCreateRsoModal({ show, onHide }) {
   const [rsoName, setRsoName] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
   const [otherEmails, setOtherEmails] = useState("");
+  const [universityName, setUniversityName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!rsoName || !adminEmail || !otherEmails) {
+    if (!rsoName || !adminEmail || !universityName || !otherEmails) {
       setErrorMessage("Please make sure all fields are filled out correctly.");
       setShowAlert(true);
       return;
     }
+
+    const responseUniID = await fetch("http://localhost:3000/fetchuni_id?name=" + encodeURIComponent(universityName));
+    
+    if(responseUniID.status === 404)
+    {
+      setErrorMessage("University name does not exist, please use the exact name");
+      setShowAlert(true);
+      return;
+    }
+    const universityID = (await responseUniID.json()).id; 
 
     const data = {
       user_id: localStorage.getItem("email"),
       rso_name: rsoName,
       administrator_email: adminEmail,
       emails: otherEmails,
+      UNI_ID: universityID,
     };
 
     const response = await fetch("http://localhost:3000/rso_create_request", {
@@ -69,6 +81,15 @@ function RequestCreateRsoModal({ show, onHide }) {
                 placeholder="Enter email of who will be the admin of this RSO"
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Enter the Full University Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="University of Central Florida"
+                value={universityName}
+                onChange={(e) => setUniversityName(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
