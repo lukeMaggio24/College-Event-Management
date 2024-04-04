@@ -40,6 +40,7 @@ CREATE TABLE universities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
   numOfStudents INT NOT NULL,
+  email_domain VARCHAR(255) NOT NULL,
   description TEXT
 );
 
@@ -57,4 +58,22 @@ CREATE TABLE events (
     latitude DECIMAL(10, 8),
     longitude DECIMAL(11, 8),
     PRIMARY KEY (id)
+);
+
+CREATE TABLE rso_create_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255),
+    rso_name VARCHAR(255),
+    administrator_email VARCHAR(255),
+    emails TEXT,
+    UNI_id INT,
+    FOREIGN KEY(UNI_ID) REFERENCES universities(id)
+);
+
+CREATE TABLE RSO (
+rso_id INT AUTO_INCREMENT PRIMARY KEY,
+rso_owner VARCHAR(255),
+numOfMembers INT,
+university_id INT,
+FOREIGN KEY (university_id) REFERENCES universities(id)
 );
