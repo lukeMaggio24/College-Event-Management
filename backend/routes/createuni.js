@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../database");
 
 router.post("/", (req, res) => {
-  const { name, numOfStudents, description } = req.body;
+  const { name, numOfStudents, universityDomain, description } = req.body;
 
   const checkQuery = "SELECT * FROM universities WHERE name = ?";
   db.query(checkQuery, [name], (error, results) => {
@@ -14,8 +14,8 @@ router.post("/", (req, res) => {
       res.status(400).json({ message: "University name already taken" });
     } else {
       const insertQuery =
-        "INSERT INTO universities (name, numOfStudents, description) VALUES (?, ?, ?)";
-      const values = [name, numOfStudents, description];
+        "INSERT INTO universities (name, numOfStudents, university_domain, description) VALUES (?, ?, ?, ?)";
+      const values = [name, numOfStudents, universityDomain, description];
 
       db.query(insertQuery, values, (error, results, fields) => {
         if (error) {

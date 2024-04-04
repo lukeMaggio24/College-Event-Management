@@ -20,7 +20,6 @@ function RequestCreateRsoModal({ show, onHide }) {
     }
 
     const responseUniID = await fetch("http://localhost:3000/fetchuni_id?name=" + encodeURIComponent(universityName));
-    
     if(responseUniID.status === 404)
     {
       setErrorMessage("University name does not exist, please use the exact name");
@@ -28,6 +27,35 @@ function RequestCreateRsoModal({ show, onHide }) {
       return;
     }
     const universityID = (await responseUniID.json()).id; 
+
+
+    const responseUniDomain = await fetch("http://localhost:3000/fetch_uni_domain?id=" + encodeURIComponent(universityID));
+    const uni_domain = (await responseUniDomain.json()).university_domain.split("@")[1];
+
+    const emails = otherEmails.split(/[\s,]+/);
+    const domains = emails.map(email => email.split("@")[1]);
+
+    if(uni_domain != domains[0])
+    {
+      setErrorMessage("Does not match Universities domain");
+      setShowAlert(true);
+      return;
+    }
+    const allSameDomain = domains.every(domain => domain === domains[0]);
+    const adminDomain = adminEmail.split("@")[1];
+
+    if(domains.length < 4)
+    {
+      setErrorMessage("You need at least 4 other students.");
+      setShowAlert(true);
+      return;
+    }
+
+    if (!allSameDomain || adminDomain != domains[0]) {
+      setErrorMessage("All emails should have the same domain.");
+      setShowAlert(true);
+      return;
+    }
 
     const data = {
       user_id: localStorage.getItem("email"),

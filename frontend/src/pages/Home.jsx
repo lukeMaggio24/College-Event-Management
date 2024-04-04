@@ -18,6 +18,7 @@ function Home() {
       const response = await fetch("http://localhost:3000/fetchevents");
       const data = await response.json();
       setEvents(data);
+      console.log(data);
     };
 
     fetchEvents();

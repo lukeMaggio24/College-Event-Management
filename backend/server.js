@@ -28,6 +28,7 @@ const rso_create_request = require("./routes/rso_create_request.js");
 const fetchRsoRequests = require("./routes/fetchrsorequests.js");
 const denyRequest = require("./routes/denyrequest.js");
 const fetchuni_id = require("./routes/fetchuni_id.js");
+const fetch_uni_domain = require("./routes/fetch_uni_domain");
 // const acceptRequest = require("./routes/acceptrequest.js");
 
 app.use("/signup", signupRoute);
@@ -40,6 +41,7 @@ app.use("/rso_create_request", rso_create_request);
 app.use("/fetchrsorequests", fetchRsoRequests);
 app.use("/denyrequest", denyRequest);
 app.use("/fetchuni_id", fetchuni_id);
+app.use("/fetch_uni_domain", fetch_uni_domain);
 // app.use("/acceptrequest", acceptRequest);
 
 module.exports = db;
