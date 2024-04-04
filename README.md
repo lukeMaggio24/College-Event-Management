@@ -1,9 +1,15 @@
 # TODO
 - table for rso_join_requests (implementation will be similar to rso_create_requests).<br>
+- users table should be 3 seperate tables for student, admin, and super admin <br>
+- comment and rating system for events?<br>
+- ER diagram and relational schema<br>
+- add ratings float to events table<br>
+- add boolean for RSO table to see if that is true ( > 5 students means active)<br>
 - create a Student modal to request to join an RSO, where that request is put into the database mentioned above.<br>
 - create a Admin modal similar to ViewRsoCreateRequests.jsx to show students' requests to join an RSO.<br>
 - table to store an RSO and its users.<br>
-- (why do we need to track the users in an RSO?)<br>
+- screenshots of api<br>
+- <br>
 <br>
 
 # College-Event-Management
