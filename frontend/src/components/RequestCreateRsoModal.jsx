@@ -44,7 +44,8 @@ function RequestCreateRsoModal({ show, onHide }) {
     const allSameDomain = domains.every(domain => domain === domains[0]);
     const adminDomain = adminEmail.split("@")[1];
 
-    if(domains.length < 4)
+    const length = domains.length;
+    if(length < 4)
     {
       setErrorMessage("You need at least 4 other students.");
       setShowAlert(true);
@@ -62,6 +63,7 @@ function RequestCreateRsoModal({ show, onHide }) {
       rso_name: rsoName,
       administrator_email: adminEmail,
       emails: otherEmails,
+      initialNumOfMembers: length,
       UNI_ID: universityID,
     };
 
