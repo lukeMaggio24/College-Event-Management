@@ -11,7 +11,7 @@
 - table to store an RSO and its users.<br>
 - screenshots of api<br>
 - <br>
-needed: Walkthrough of your application.✅<br>
+needed: <br>Walkthrough of your application.✅<br>
 Demonstration of the current state of your database, including five users with different privileges, three Registered Student Organizations (RSOs), and one event per RSO.✅<br>
 Creation of a new user as an administrator.✅<br>
 Registration of a new user.✅<br>
