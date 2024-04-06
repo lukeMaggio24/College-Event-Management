@@ -16,11 +16,18 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [university, setUniversity] = useState("");
+  const [rso, setRso] = useState("");
 
   const handleSignup = async (event) => {
     event.preventDefault();
 
-    if (dropdownTitle === "Status" || !email || !password) {
+    if (
+      dropdownTitle === "Status" ||
+      !email ||
+      !password ||
+      (dropdownTitle === "Admin" && (!university || !rso))
+    ) {
       setErrorMessage("Please make sure all fields are filled out correctly.");
       setShowAlert(true);
       return;
@@ -31,7 +38,7 @@ function SignUp() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password, role: dropdownTitle }),
+      body: JSON.stringify({ email, password, role: dropdownTitle, university, rso }),
     });
 
     if (response.ok) {
@@ -49,7 +56,7 @@ function SignUp() {
         <Container>
           <Navbar.Brand href="#home">Sign up </Navbar.Brand>
           <Button variant="primary" onClick={() => navigate("/login")}>
-            Nagivate to Login
+            Navigate to Login
           </Button>
         </Container>
       </Navbar>
@@ -92,6 +99,31 @@ function SignUp() {
             Super Admin
           </Dropdown.Item>
         </DropdownButton>
+
+        {dropdownTitle === "Admin" && (
+          <>
+            <Form.Group className="mb-3" controlId="formBasicUniversity">
+              <Form.Label>University</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter University"
+                value={university}
+                onChange={(e) => setUniversity(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicRso">
+              <Form.Label>RSO</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter RSO"
+                value={rso}
+                onChange={(e) => setRso(e.target.value)}
+              />
+            </Form.Group>
+          </>
+        )}
+
         <Form.Text className="text-muted">
           You will be assigned a User ID once logged in<br></br>
         </Form.Text>
