@@ -11,10 +11,10 @@
 - table to store an RSO and its users.<br>
 - screenshots of api<br>
 - <br>
-needed: Walkthrough of your application.<br>
+needed: Walkthrough of your application.✅<br>
 Demonstration of the current state of your database, including five users with different privileges, three Registered Student Organizations (RSOs), and one event per RSO.✅<br>
-Creation of a new user as an administrator.<br>
-Registration of a new user.<br>
+Creation of a new user as an administrator.✅<br>
+Registration of a new user.✅<br>
 Logging in of the new user.✅<br>
 Creation of a new RSO.<br>
 Joining of the new user to the RSO, while an existing user leaves.<br>
@@ -30,11 +30,14 @@ https://webcourses.ucf.edu/courses/1448083/files/104489757?module_item_id=180081
 
 # Database:
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('Student', 'Admin', 'Super Admin') NOT NULL
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('Student', 'Admin', 'Super Admin') NOT NULL,
+  university VARCHAR(255),
+  rso VARCHAR(255)
 );
+
 
 CREATE TABLE universities (
   id INT AUTO_INCREMENT PRIMARY KEY,
