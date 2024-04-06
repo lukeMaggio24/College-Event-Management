@@ -81,3 +81,13 @@ active BOOLEAN,
 university_id INT,
 FOREIGN KEY (university_id) REFERENCES universities(id)
 );
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT,
+  event_id INT,
+  comment TEXT,
+  rating INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (event_id) REFERENCES events(id)
+);
