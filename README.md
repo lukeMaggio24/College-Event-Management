@@ -12,16 +12,16 @@
 - screenshots of api<br>
 - <br>
 needed: Walkthrough of your application.<br>
-Demonstration of the current state of your database, including five users with different privileges, three Registered Student Organizations (RSOs), and one event per RSO.<br>✅
+Demonstration of the current state of your database, including five users with different privileges, three Registered Student Organizations (RSOs), and one event per RSO.✅<br>
 Creation of a new user as an administrator.<br>
 Registration of a new user.<br>
-Logging in of the new user.<br>✅
+Logging in of the new user.✅<br>
 Creation of a new RSO.<br>
 Joining of the new user to the RSO, while an existing user leaves.<br>
-Creation of new events (RSO, private, public) with a demonstration of the implemented code for enforcing overlapping constraints.<br>✅
+Creation of new events (RSO, private, public) with a demonstration of the implemented code for enforcing overlapping constraints.✅<br>
 Logging in of an existing user and access to events (public events, private events of the user's attending university, and events of RSOs the user is a member of).<br>
 Creation, viewing, modification, and deletion of comments.<br>
-Showcase of any additional features for bonus points.<br>✅
+Showcase of any additional features for bonus points.✅<br>
 <br>
 # College-Event-Management
 Allows for Universities to create university profiles. RSO owners to create events and for students to attend these events. These events can have various attributes such as public or private. With a google maps type of image for these locations as well a rating system.
