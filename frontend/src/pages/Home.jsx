@@ -18,7 +18,6 @@ function Home() {
       const response = await fetch("http://localhost:3000/fetchevents");
       const data = await response.json();
       setEvents(data);
-      console.log(data);
     };
 
     fetchEvents();
@@ -96,18 +95,18 @@ function Home() {
           <EventCard
             key={event.id}
             id={event.id}
-            university={event.university}
-            name={event.name}
-            visibility={event.visibility}
-            category={event.category}
+            university={event.university_name}
+            name={event.event_name}
+            visibility={event.event_visibility}
+            category={event.event_category}
             description={event.description}
             date={event.date}
-            starttime={event.starttime}
-            contactphone={event.contactphone}
-            contactemail={event.contactemail}
+            starttime={event.time}
+            contactphone={event.contact_phone}
+            contactemail={event.contact_email}
             locationName={event.locationName}
-            locationLongitude={event.locationLongitude}
-            locationLatitude={event.locationLatitude}
+            locationLongitude={event.longitude}
+            locationLatitude={event.latitude}
           />
         ))}
       </div>
