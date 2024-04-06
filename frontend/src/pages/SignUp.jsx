@@ -33,6 +33,14 @@ function SignUp() {
       return;
     }
 
+    const responseUniID = await fetch("http://localhost:3000/fetchuni_id?name=" + encodeURIComponent(university));
+    if(responseUniID.status === 404)
+    {
+      setErrorMessage("University name does not exist, please use the exact name");
+      setShowAlert(true);
+      return;
+    }
+
     const response = await fetch("http://localhost:3000/signup", {
       method: "POST",
       headers: {
