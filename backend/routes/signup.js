@@ -1,13 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
+const bcrypt = require("bcrypt");
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { email, password, role, university, rso } = req.body;
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
   const query =
     "INSERT INTO users (email, password, role, university, rso) VALUES (?, ?, ?, ?, ?)";
-  const values = [email, password, role, university, rso];
+  const values = [email, hashedPassword, role, university, rso];
 
   db.query(query, values, (error, results, fields) => {
     if (error) {
