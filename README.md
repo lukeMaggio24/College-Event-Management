@@ -5,6 +5,7 @@
 - add boolean for RSO table to see if that is true ( > 5 students means active)<br>
 - create a Student modal to request to join an RSO, where that request is put into the database mentioned above.<br>
 - create a Admin modal similar to ViewRsoCreateRequests.jsx to show students' requests to join an RSO.<br>
+- insert google maps api key<br>
 <br>
 needed: <br>Walkthrough of your application.✅<br>
 Demonstration of the current state of your database, including five users with different privileges, three Registered Student Organizations (RSOs), and one event per RSO.✅<br>
@@ -15,7 +16,7 @@ Creation of a new RSO.<br>
 Joining of the new user to the RSO, while an existing user leaves.<br>
 Creation of new events (RSO, private, public) with a demonstration of the implemented code for enforcing overlapping constraints.✅<br>
 Logging in of an existing user and access to events (public events, private events of the user's attending university, and events of RSOs the user is a member of).<br>
-Creation, viewing, modification, and deletion of comments.<br>
+Creation, viewing, modification, and deletion of comments.✅<br>
 Showcase of any additional features for bonus points.✅<br>
 <br>
 # College-Event-Management
