@@ -29,10 +29,12 @@ const fetchRsoRequests = require("./routes/fetchrsorequests.js");
 const denyRequest = require("./routes/denyrequest.js");
 const fetchuni_id = require("./routes/fetchuni_id.js");
 const fetch_uni_domain = require("./routes/fetch_uni_domain");
+const fetchComments = require("./routes/fetchcomments.js");
+const addcomment = require("./routes/addcomment.js");
+const deleteComment = require("./routes/deletecomment.js");
+const editComment = require("./routes/editcomment.js");
 const acceptrequest = require("./routes/acceptrequest.js");
 const fetch_user_id_byEmail = require("./routes/fetch_user_id_byEmail.js");
-
-// const acceptRequest = require("./routes/acceptrequest.js");
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -45,8 +47,11 @@ app.use("/fetchrsorequests", fetchRsoRequests);
 app.use("/denyrequest", denyRequest);
 app.use("/fetchuni_id", fetchuni_id);
 app.use("/fetch_uni_domain", fetch_uni_domain);
+app.use("/fetchcomments", fetchComments);
+app.use("/addcomment", addcomment);
+app.use("/deletecomment", deleteComment);
+app.use("/editcomment", editComment);
 app.use("/acceptrequest", acceptrequest);
 app.use("/fetch_user_id_byEmail", fetch_user_id_byEmail);
-// app.use("/acceptrequest", acceptRequest);
 
 module.exports = db;

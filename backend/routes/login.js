@@ -17,6 +17,7 @@ router.post("/", (req, res) => {
       res.status(200).json({
         message: "User logged in successfully",
         role: results[0].role,
+        id: results[0].id,
       });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
