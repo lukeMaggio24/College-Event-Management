@@ -85,6 +85,7 @@ FOREIGN KEY (university_id) REFERENCES universities(id)
 CREATE TABLE comments (
   id INT AUTO_INCREMENT,
   event_id INT,
+  user_id INT,
   comment TEXT,
   rating INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
