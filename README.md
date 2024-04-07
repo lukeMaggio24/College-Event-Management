@@ -1,7 +1,6 @@
 # TODO:
 - table for rso_join_requests (implementation will be similar to rso_create_requests).<br>
 - ER diagram and relational schema<br>
-- bcrypt password encryption<br>
 - add boolean for RSO table to see if that is true ( > 5 students means active)<br>
 - create a Student modal to request to join an RSO, where that request is put into the database mentioned above.<br>
 - create a Admin modal similar to ViewRsoCreateRequests.jsx to show students' requests to join an RSO.<br>
