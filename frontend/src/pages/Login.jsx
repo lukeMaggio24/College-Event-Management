@@ -37,6 +37,7 @@ function Login() {
       navigate("/home");
       localStorage.setItem("email", email);
       localStorage.setItem("role", data.role);
+      localStorage.setItem("user_id", data.id);
     } else {
       setErrorMessage(data.message);
       setShowAlert(true);

@@ -20,27 +20,31 @@ function ViewRsoCreateRequests({ show, onHide }) {
   }, [show]);
 
   const handleAccept = async (request) => {
-
-    const responseUserID = await fetch(`http://localhost:3000/fetch_user_id_byEmail?administrator_email=`+ encodeURIComponent(request.administrator_email));
+    const responseUserID = await fetch(
+      `http://localhost:3000/fetch_user_id_byEmail?administrator_email=` +
+        encodeURIComponent(request.administrator_email)
+    );
     //TO DO catch for 404 error (when the admin email doesnt exist)
     const rso_owner_id = (await responseUserID.json()).id;
 
     const response = await fetch(`http://localhost:3000/acceptrequest`, {
       method: "POST",
-      headers: { "Content-Type": "application/json"},
-      body: JSON.stringify({rso_owner_id: rso_owner_id, rso_name: request.rso_name,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rso_owner_id: rso_owner_id,
+        rso_name: request.rso_name,
         administrator_email: request.administrator_email,
-        numOfMembers: request.initialNumOfMembers, UNI_id: request.UNI_id})
-  });
-  handleDeny(request);
+        numOfMembers: request.initialNumOfMembers,
+        UNI_id: request.UNI_id,
+      }),
+    });
+    handleDeny(request);
 
-  const refreshResponse = await fetch(
-    "http://localhost:3000/fetchrsorequests"
-  );
-  const refreshData = await refreshResponse.json();
-  setRequests(refreshData);
-
-
+    const refreshResponse = await fetch(
+      "http://localhost:3000/fetchrsorequests"
+    );
+    const refreshData = await refreshResponse.json();
+    setRequests(refreshData);
   };
 
   const handleDeny = async (request) => {
