@@ -19,34 +19,46 @@ function RequestCreateRsoModal({ show, onHide }) {
       return;
     }
 
-    const responseUniID = await fetch("http://localhost:3000/fetchuni_id?name=" + encodeURIComponent(universityName));
-    if(responseUniID.status === 404)
-    {
-      setErrorMessage("University name does not exist, please use the exact name");
+    const responseUniID = await fetch(
+      "http://localhost:3000/fetchuni_id?name=" +
+        encodeURIComponent(universityName)
+    );
+    if (responseUniID.status === 404) {
+      setErrorMessage(
+        "University name does not exist, please use the exact name"
+      );
       setShowAlert(true);
       return;
     }
-    const universityID = (await responseUniID.json()).id; 
+    const universityID = (await responseUniID.json()).id;
+    console.log(universityID + " uni id <---");
 
+    const responseUniDomain = await fetch(
+      "http://localhost:3000/fetch_uni_domain?id=" +
+        encodeURIComponent(universityID)
+    );
 
-    const responseUniDomain = await fetch("http://localhost:3000/fetch_uni_domain?id=" + encodeURIComponent(universityID));
-    const uni_domain = (await responseUniDomain.json()).university_domain.split("@")[1];
+    const responseUniDomainJson = await responseUniDomain.json();
+    if (!responseUniDomainJson.university_domain) {
+      setErrorMessage("Email domain not found");
+      setShowAlert(true);
+      return;
+    }
+    const uni_domain = responseUniDomainJson.university_domain.split("@")[1];
 
     const emails = otherEmails.split(/[\s,]+/);
-    const domains = emails.map(email => email.split("@")[1]);
+    const domains = emails.map((email) => email.split("@")[1]);
 
-    if(uni_domain != domains[0])
-    {
+    if (uni_domain != domains[0]) {
       setErrorMessage("Does not match Universities domain");
       setShowAlert(true);
       return;
     }
-    const allSameDomain = domains.every(domain => domain === domains[0]);
+    const allSameDomain = domains.every((domain) => domain === domains[0]);
     const adminDomain = adminEmail.split("@")[1];
 
     const length = domains.length;
-    if(length < 4)
-    {
+    if (length < 4) {
       setErrorMessage("You need at least 4 other students.");
       setShowAlert(true);
       return;
@@ -113,7 +125,7 @@ function RequestCreateRsoModal({ show, onHide }) {
                 onChange={(e) => setAdminEmail(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
+            <Form.Group className="mb-3">
               <Form.Label>Enter the Full University Name</Form.Label>
               <Form.Control
                 type="text"

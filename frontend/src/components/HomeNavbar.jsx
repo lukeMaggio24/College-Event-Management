@@ -21,7 +21,8 @@ function HomeNavbar() {
   const [showRequestJoinRsoModal, setShowRequestJoinRsoModal] = useState(false);
   const [showRequestCreateRsoModal, setShowRequestCreateRsoModal] =
     useState(false);
-  const [showViewRsoCreateRequests, setShowViewRsoCreateRequests] = useState(false);
+  const [showViewRsoCreateRequests, setShowViewRsoCreateRequests] =
+    useState(false);
 
   const role = localStorage.getItem("role");
 
@@ -31,7 +32,8 @@ function HomeNavbar() {
         <Container>
           <Navbar.Brand>
             ID: {localStorage.getItem("email")}, Role:{" "}
-            {localStorage.getItem("role")}
+            {localStorage.getItem("role")}, Uni:{" "}
+            {localStorage.getItem("university")}
           </Navbar.Brand>
 
           <DropdownButton id="dropdown-basic-button" title="Student">

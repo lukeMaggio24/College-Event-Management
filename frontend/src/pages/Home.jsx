@@ -30,6 +30,7 @@ function Home() {
   const [selectedUniversity, setSelectedUniversity] =
     useState("Show All Public");
 
+  // absolutely unreadable
   useEffect(() => {
     setFilteredEvents(
       events.filter(
@@ -43,6 +44,19 @@ function Home() {
       )
     );
   }, [searchTerm, events, selectedUniversity]);
+
+  useEffect(() => {
+    setFilteredEvents((prevEvents) =>
+      prevEvents.filter(
+        (event) =>
+          event.event_visibility !== "RSO" ||
+          event.member_emails
+            .split("\n")
+            .includes(localStorage.getItem("email")) ||
+          event.administrator_email.includes(localStorage.getItem("email"))
+      )
+    );
+  }, [events]);
 
   // on page load, fetch unis from dropdown
   const [universities, setUniversities] = useState([]);
@@ -72,7 +86,8 @@ function Home() {
       <div className="center-horizontally">
         <h6>
           To see private events for a specific university, you must be a student
-          of that university.
+          of that university. Likewise, RSO events may only be seen by members
+          of that RSO.
         </h6>
       </div>
       <div className="parent-div">
