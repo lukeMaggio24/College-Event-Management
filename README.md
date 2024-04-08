@@ -38,7 +38,7 @@ CREATE TABLE universities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
   numOfStudents INT NOT NULL,
-  email_domain VARCHAR(255) NOT NULL,
+  university_domain VARCHAR(255) NOT NULL,
   description TEXT
 );
 
