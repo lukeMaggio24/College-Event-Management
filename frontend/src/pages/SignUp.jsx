@@ -8,6 +8,7 @@ import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Alert from "react-bootstrap/Alert";
+import { useEffect } from "react";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -16,8 +17,20 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [university, setUniversity] = useState("");
+  const [university, setUniversity] = useState("Choose a University");
   const [rso, setRso] = useState("");
+
+  // on page load, fetch unis from dropdown
+  const [universities, setUniversities] = useState([]);
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      const response = await fetch("http://localhost:3000/fetchunis");
+      const data = await response.json();
+      setUniversities(data);
+    };
+
+    fetchUniversities();
+  }, []);
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -32,22 +45,33 @@ function SignUp() {
       setShowAlert(true);
       return;
     }
-    
-    if(dropdownTitle === "Admin") {
-    const responseUniID = await fetch("http://localhost:3000/fetchuni_id?name=" + encodeURIComponent(university));
-    if(responseUniID.status === 404)
-    {
-      setErrorMessage("University name does not exist, please use the exact name");
-      setShowAlert(true);
-      return;
-    } }
+
+    if (dropdownTitle === "Admin") {
+      const responseUniID = await fetch(
+        "http://localhost:3000/fetchuni_id?name=" +
+          encodeURIComponent(university)
+      );
+      if (responseUniID.status === 404) {
+        setErrorMessage(
+          "University name does not exist, please use the exact name"
+        );
+        setShowAlert(true);
+        return;
+      }
+    }
 
     const response = await fetch("http://localhost:3000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password, role: dropdownTitle, university, rso }),
+      body: JSON.stringify({
+        email,
+        password,
+        role: dropdownTitle,
+        university,
+        rso,
+      }),
     });
 
     if (response.ok) {
@@ -87,7 +111,6 @@ function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -97,6 +120,24 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
+        <DropdownButton
+          id="dropdown-basic-button"
+          title={university}
+          className="mr-2 mb-2"
+        >
+          {universities.map((university) => (
+            <Dropdown.Item
+              key={university.id}
+              onClick={() => {
+                setUniversity(university.name);
+                // setSelectedUniversity(university.name); // Add this line
+              }}
+            >
+              {university.name}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
         <DropdownButton id="dropdown-basic-button" title={dropdownTitle}>
           <Dropdown.Item onClick={() => setDropdownTitle("Student")}>
             Student
@@ -111,7 +152,7 @@ function SignUp() {
 
         {dropdownTitle === "Admin" && (
           <>
-            <Form.Group className="mb-3" controlId="formBasicUniversity">
+            {/* <Form.Group className="mb-3" controlId="formBasicUniversity">
               <Form.Label>University</Form.Label>
               <Form.Control
                 type="text"
@@ -119,7 +160,7 @@ function SignUp() {
                 value={university}
                 onChange={(e) => setUniversity(e.target.value)}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="mb-3" controlId="formBasicRso">
               <Form.Label>RSO</Form.Label>

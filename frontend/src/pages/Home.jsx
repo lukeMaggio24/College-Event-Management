@@ -27,16 +27,19 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState(events);
-  const [selectedUniversity, setSelectedUniversity] = useState(
-    "Choose a University"
-  );
+  const [selectedUniversity, setSelectedUniversity] =
+    useState("Show All Public");
 
   useEffect(() => {
     setFilteredEvents(
       events.filter(
         (event) =>
           event.event_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          event.university_name === selectedUniversity
+          (selectedUniversity === "Show All Public"
+            ? event.event_visibility === "Public"
+            : event.university_name === selectedUniversity &&
+              (event.event_visibility === "Public" ||
+                localStorage.getItem("university") === selectedUniversity))
       )
     );
   }, [searchTerm, events, selectedUniversity]);
@@ -58,6 +61,19 @@ function Home() {
       <HomeNavbar />
       <div className="center-horizontally mt-2">
         <h4>Select a university to start searching for events.</h4>
+        <br />
+      </div>
+      <div className="center-horizontally">
+        <h6>
+          If no search criteria or university filter is selected, it will show
+          all public events.
+        </h6>
+      </div>
+      <div className="center-horizontally">
+        <h6>
+          To see private events for a specific university, you must be a student
+          of that university.
+        </h6>
       </div>
       <div className="parent-div">
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -74,6 +90,11 @@ function Home() {
                 {university.name}
               </Dropdown.Item>
             ))}
+            <Dropdown.Item
+              onClick={() => setSelectedUniversity("Show All Public")}
+            >
+              Show All Public
+            </Dropdown.Item>
           </DropdownButton>
           <Form className="d-flex">
             <Form.Control
