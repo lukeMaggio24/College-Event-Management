@@ -34,6 +34,7 @@ function ViewRsoCreateRequests({ show, onHide }) {
         rso_owner_id: rso_owner_id,
         rso_name: request.rso_name,
         administrator_email: request.administrator_email,
+        member_emails: request.emails,
         numOfMembers: request.initialNumOfMembers,
         UNI_id: request.UNI_id,
       }),

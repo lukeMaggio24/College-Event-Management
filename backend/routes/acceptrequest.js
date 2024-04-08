@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../database");
 
 router.post("/", (req, res) => {
-  const { rso_owner_id, rso_name, administrator_email, numOfMembers, UNI_id } =
+  const { rso_owner_id, rso_name, administrator_email, member_emails, numOfMembers, UNI_id } =
     req.body;
   const active = 1;
 
@@ -16,11 +16,12 @@ router.post("/", (req, res) => {
       res.status(400).json({ message: "RSO name already taken" });
     } else {
       const insertQuery =
-        "INSERT INTO rso (rso_owner_id, rso_name, administrator_email, numOfMembers, active, UNI_id) VALUES (?, ?, ?, ?, ?, ?)";
+        "INSERT INTO rso (rso_owner_id, rso_name, administrator_email, member_emails, numOfMembers, active, UNI_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
       const values = [
         rso_owner_id,
         rso_name,
         administrator_email,
+        member_emails,
         numOfMembers,
         active,
         UNI_id,

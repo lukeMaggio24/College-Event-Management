@@ -2,6 +2,12 @@ import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function RequestJoinRsoModal({ show, onHide }) {
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("JOE MAMA");
+  };
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -9,7 +15,7 @@ function RequestJoinRsoModal({ show, onHide }) {
           <Modal.Title>Request to join an RSO</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>RSO Name</Form.Label>
               <Form.Control type="text" placeholder="Enter name of RSO" />
