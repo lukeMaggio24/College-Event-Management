@@ -35,6 +35,7 @@ const deleteComment = require("./routes/deletecomment.js");
 const editComment = require("./routes/editcomment.js");
 const acceptrequest = require("./routes/acceptrequest.js");
 const fetch_user_id_byEmail = require("./routes/fetch_user_id_byEmail.js");
+const request_to_join_RSO = require("./routes/request_to_join_RSO.js");
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -53,5 +54,6 @@ app.use("/deletecomment", deleteComment);
 app.use("/editcomment", editComment);
 app.use("/acceptrequest", acceptrequest);
 app.use("/fetch_user_id_byEmail", fetch_user_id_byEmail);
+app.use("/request_to_join_rso", request_to_join_RSO);
 
 module.exports = db;
