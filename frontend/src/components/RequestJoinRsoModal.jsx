@@ -21,7 +21,7 @@ function RequestJoinRsoModal({ show, onHide }) {
       rso_name: rsoName,
       email: email 
     }
-    console.log(data.rso_name);
+  
     const responseJoinRequest = await fetch("http://localhost:3000/request_to_join_rso",
     {
       method: "POST",
@@ -30,11 +30,16 @@ function RequestJoinRsoModal({ show, onHide }) {
       },
       body: JSON.stringify(data)
     });
-
-    if (responseJoinRequest.ok)
+    if (responseJoinRequest.status === 404)
+    {
+      setErrorMessage("RSO does not exist");
+      setShowAlert(true);
+      return;
+    }
+    else if(responseJoinRequest.ok)
     {
       onHide();
-      //window.location.reload();
+      window.location.reload();
     }
     else{
       return;

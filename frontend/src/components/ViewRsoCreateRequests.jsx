@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Table } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Alert } from "react-bootstrap";
+
 
 function ViewRsoCreateRequests({ show, onHide }) {
   const [requests, setRequests] = useState([]);
@@ -39,13 +41,10 @@ function ViewRsoCreateRequests({ show, onHide }) {
         UNI_id: request.UNI_id,
       }),
     });
-    handleDeny(request);
-
-    const refreshResponse = await fetch(
-      "http://localhost:3000/fetchrsorequests"
-    );
-    const refreshData = await refreshResponse.json();
-    setRequests(refreshData);
+    if(response.ok)
+    {
+        handleDeny(value);
+    }
   };
 
   const handleDeny = async (request) => {
@@ -65,8 +64,7 @@ function ViewRsoCreateRequests({ show, onHide }) {
       const refreshData = await refreshResponse.json();
       setRequests(refreshData);
     } catch (error) {
-      setErrorMessage("Error ", error);
-      setShowAlert(true);
+        console.log(error);
     }
   };
 

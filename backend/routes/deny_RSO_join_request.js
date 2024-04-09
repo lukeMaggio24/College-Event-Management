@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require("../database");
 
 router.delete("/", (reg, res) => {
-    const {email} = reg.body;
+    const {id} = reg.body;
 
-    query = "DELETE FROM rso_join_request WHERE email = ?";
-    db.query(query, [email], (error, results) => {
+    query = "DELETE FROM rso_join_request WHERE id = ?";
+    db.query(query, [id], (error, results) => {
         if(error)
         {
             console.log(error);

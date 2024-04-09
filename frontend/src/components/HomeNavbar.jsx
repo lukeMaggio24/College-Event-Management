@@ -12,6 +12,7 @@ import CreateEventModal from "../components/CreateEventModal";
 import RequestJoinRsoModal from "../components/RequestJoinRsoModal";
 import RequestCreateRsoModal from "../components/RequestCreateRsoModal";
 import ViewRsoCreateRequests from "./ViewRsoCreateRequests";
+import ViewRsoJoinRequests from "./ViewRsoJoinRequests";
 
 function HomeNavbar() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function HomeNavbar() {
     useState(false);
   const [showViewRsoCreateRequests, setShowViewRsoCreateRequests] =
     useState(false);
+  const [showViewRsoJoinRequests, setShowViewRsoJoinRequests] = useState(false);
 
   const role = localStorage.getItem("role");
 
@@ -53,7 +55,7 @@ function HomeNavbar() {
               Create Event
             </Dropdown.Item>
             <Dropdown.Item
-              onClick={() => setShowCreateEventModal(true)}
+              onClick={() => setShowViewRsoJoinRequests(true)}
               disabled={role !== "Admin" && role !== "Super Admin"}
             >
               View Requests to join RSO
@@ -99,6 +101,10 @@ function HomeNavbar() {
       <ViewRsoCreateRequests
         show={showViewRsoCreateRequests}
         onHide={() => setShowViewRsoCreateRequests(false)}
+      />
+      <ViewRsoJoinRequests
+        show={showViewRsoJoinRequests}
+        onHide={() => setShowViewRsoJoinRequests(false)}
       />
     </div>
   );
