@@ -38,7 +38,7 @@ CREATE TABLE universities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
   numOfStudents INT NOT NULL,
-  email_domain VARCHAR(255) NOT NULL,
+  university_domain VARCHAR(255) NOT NULL,
   description TEXT
 );
 
@@ -74,10 +74,11 @@ rso_id INT AUTO_INCREMENT PRIMARY KEY,
 rso_owner_id INT,
 rso_name VARCHAR(255),
 administrator_email VARCHAR(255),
+member_emails TEXT,
 numOfMembers INT,
 active BOOLEAN,
-university_id INT,
-FOREIGN KEY (university_id) REFERENCES universities(id),
+UNI_id INT,
+FOREIGN KEY (UNI_id) REFERENCES universities(id),
 FOREIGN KEY (rso_owner_id) REFERENCES users(id)
 );
 

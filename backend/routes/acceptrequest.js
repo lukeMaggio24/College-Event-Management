@@ -3,8 +3,14 @@ const router = express.Router();
 const db = require("../database");
 
 router.post("/", (req, res) => {
-  const { rso_owner_id, rso_name, administrator_email, member_emails, numOfMembers, UNI_id } =
-    req.body;
+  const {
+    rso_owner_id,
+    rso_name,
+    administrator_email,
+    member_emails,
+    numOfMembers,
+    UNI_id,
+  } = req.body;
   const active = 1;
 
   const checkQuery = "SELECT * FROM rso WHERE rso_name =?";

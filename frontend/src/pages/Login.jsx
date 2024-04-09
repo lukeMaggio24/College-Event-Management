@@ -38,6 +38,7 @@ function Login() {
       localStorage.setItem("email", email);
       localStorage.setItem("role", data.role);
       localStorage.setItem("user_id", data.id);
+      localStorage.setItem("university", data.university);
     } else {
       setErrorMessage(data.message);
       setShowAlert(true);
