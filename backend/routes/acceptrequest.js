@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
       console.log(error);
       res.status(500).json({ message: "Error checking for RSO" });
     } else if (results.length > 0) {
-      res.status(404).json({ message: "RSO name already taken" });
+      res.status(400).json({ message: "RSO name already taken" });
     } else {
       const insertQuery =
         "INSERT INTO rso (rso_owner_id, rso_name, administrator_email, member_emails, numOfMembers, active, UNI_id) VALUES (?, ?, ?, ?, ?, ?, ?)";

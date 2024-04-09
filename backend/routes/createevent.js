@@ -15,10 +15,11 @@ router.post("/", (req, res) => {
     contact_email,
     latitude,
     longitude,
+    rso_name,
   } = req.body;
 
   const query =
-    "INSERT INTO Events (university_name, event_name, event_category, event_visibility, description, date, time, contact_phone, contact_email, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Events (university_name, event_name, event_category, event_visibility, description, date, time, contact_phone, contact_email, latitude, longitude, rso_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   const values = [
     university_name,
     event_name,
@@ -31,6 +32,7 @@ router.post("/", (req, res) => {
     contact_email,
     latitude,
     longitude,
+    rso_name,
   ];
 
   db.query(query, values, (error, results, fields) => {
