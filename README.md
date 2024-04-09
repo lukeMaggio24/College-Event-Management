@@ -55,6 +55,7 @@ CREATE TABLE events (
     contact_email VARCHAR(255),
     latitude DECIMAL(10, 8),
     longitude DECIMAL(11, 8),
+    rso_name VARCHAR(255),
     PRIMARY KEY (id)
 );
 
