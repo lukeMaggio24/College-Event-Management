@@ -37,6 +37,8 @@ const acceptrequest = require("./routes/acceptrequest.js");
 const fetch_user_id_byEmail = require("./routes/fetch_user_id_byEmail.js");
 const request_to_join_RSO = require("./routes/request_to_join_RSO.js");
 const fetchrso = require("./routes/fetchrso.js");
+const accept_RSO_join_request = require("./routes/accept_RSO_join_request.js");
+const deny_RSO_join_request = require("./deny_RSO_join_request.js");
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -57,5 +59,7 @@ app.use("/acceptrequest", acceptrequest);
 app.use("/fetch_user_id_byEmail", fetch_user_id_byEmail);
 app.use("/request_to_join_rso", request_to_join_RSO);
 app.use("/fetchrso", fetchrso);
+app.use("/accept_RSO_join_request", accept_RSO_join_request);
+app.use("/deny_RSO_join_request", deny_RSO_join_request);
 
 module.exports = db;
