@@ -17,6 +17,7 @@ function CreateEventModal({ show, onHide }) {
   const [startTime, setStartTime] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   const [contactEmail, setContactEmail] = useState("");
+  const [rsoName, setRsoName] = useState("");
   // implement long and lat here
 
   // state for error handling
@@ -65,8 +66,9 @@ function CreateEventModal({ show, onHide }) {
       time: startTime,
       contact_phone: contactPhone,
       contact_email: contactEmail,
+      rso_name: rsoName,
 
-      // Add other fields as needed
+      // Add long and lat later
     };
 
     const response = await fetch("http://localhost:3000/createevent", {
@@ -116,7 +118,7 @@ function CreateEventModal({ show, onHide }) {
               <Form.Label>Event Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter name of RSO"
+                placeholder="Enter name of Event"
                 onChange={(e) => setEventName(e.target.value)}
               />
             </Form.Group>
@@ -132,6 +134,14 @@ function CreateEventModal({ show, onHide }) {
               <option>Private</option>
               <option>RSO Event</option>
             </Form.Select>
+            <Form.Group className="mb-3">
+              <Form.Label>RSO Name (Required only for RSO events)</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter RSO Name"
+                onChange={(e) => setRsoName(e.target.value)}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
               <Form.Control

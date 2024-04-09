@@ -15,7 +15,10 @@ function Home() {
   // on page load, fetch events
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await fetch("http://localhost:3000/fetchevents");
+      const email = localStorage.getItem("email");
+      const response = await fetch(
+        `http://localhost:3000/fetchevents?email=${email}`
+      );
       const data = await response.json();
       setEvents(data);
     };
