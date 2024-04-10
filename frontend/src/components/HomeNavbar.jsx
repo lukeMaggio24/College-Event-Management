@@ -13,6 +13,7 @@ import RequestJoinRsoModal from "../components/RequestJoinRsoModal";
 import RequestCreateRsoModal from "../components/RequestCreateRsoModal";
 import ViewRsoCreateRequests from "./ViewRsoCreateRequests";
 import ViewRsoJoinRequests from "./ViewRsoJoinRequests";
+import LeaveRsoModal from "./LeaveRsoModal";
 
 function HomeNavbar() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function HomeNavbar() {
   const [showViewRsoCreateRequests, setShowViewRsoCreateRequests] =
     useState(false);
   const [showViewRsoJoinRequests, setShowViewRsoJoinRequests] = useState(false);
+  const [showLeaveRsoModal, setShowLeaveRsoModal] = useState(false);
 
   const role = localStorage.getItem("role");
 
@@ -44,6 +46,9 @@ function HomeNavbar() {
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setShowRequestCreateRsoModal(true)}>
               Request to create RSO
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setShowLeaveRsoModal(true)}>
+              Leave an RSO
             </Dropdown.Item>
           </DropdownButton>
 
@@ -105,6 +110,10 @@ function HomeNavbar() {
       <ViewRsoJoinRequests
         show={showViewRsoJoinRequests}
         onHide={() => setShowViewRsoJoinRequests(false)}
+      />
+      <LeaveRsoModal
+        show={showLeaveRsoModal}
+        onHide={() => setShowLeaveRsoModal(false)}
       />
     </div>
   );

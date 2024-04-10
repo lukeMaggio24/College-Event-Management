@@ -6,7 +6,13 @@ const containerStyle = {
   height: "30vh",
 };
 
-function MapsComponent({ locationPickBool, longitude, latitude }) {
+function MapsComponent({
+  locationPickBool,
+  longitude,
+  latitude,
+  setLng,
+  setLat,
+}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -35,7 +41,7 @@ function MapsComponent({ locationPickBool, longitude, latitude }) {
         console.log("Geolocation is not supported by this browser.");
       }
     } else {
-      setCenter({ lat: parseFloat(longitude), lng: parseFloat(latitude) });
+      setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
     }
   }, [locationPickBool, latitude, longitude]);
 
@@ -54,6 +60,8 @@ function MapsComponent({ locationPickBool, longitude, latitude }) {
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
         });
+        setLng(event.latLng.lng());
+        setLat(event.latLng.lat());
       }
     },
     [locationPickBool]

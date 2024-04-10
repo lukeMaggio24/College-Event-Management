@@ -18,6 +18,8 @@ function CreateEventModal({ show, onHide }) {
   const [contactPhone, setContactPhone] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [rsoName, setRsoName] = useState("");
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   // implement long and lat here
 
   // state for error handling
@@ -67,8 +69,8 @@ function CreateEventModal({ show, onHide }) {
       contact_phone: contactPhone,
       contact_email: contactEmail,
       rso_name: rsoName,
-
-      // Add long and lat later
+      longitude: lng,
+      latitude: lat,
     };
 
     const response = await fetch("http://localhost:3000/createevent", {
@@ -184,7 +186,14 @@ function CreateEventModal({ show, onHide }) {
             </Form.Group>
           </Form>
           <Form.Label>Click to choose an event location</Form.Label>
-          <MapsComponent locationPickBool={true} />
+          <MapsComponent
+            locationPickBool={true}
+            setLng={setLng}
+            setLat={setLat}
+          />
+          <p>
+            Coordinates: {lat}, {lng}
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
