@@ -43,7 +43,7 @@ function ViewRsoCreateRequests({ show, onHide }) {
     });
     if(response.ok)
     {
-        handleDeny(value);
+        handleDeny(request);
     }
   };
 
