@@ -88,3 +88,9 @@ CREATE TABLE comments (
   PRIMARY KEY (id),
   FOREIGN KEY (event_id) REFERENCES events(id)
 );
+
+CREATE TABLE rso_join_request (
+id INT AUTO_INCREMENT PRIMARY KEY, 
+rso_name VARCHAR(255),
+email TEXT
+); 
