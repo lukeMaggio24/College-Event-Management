@@ -40,6 +40,7 @@ const accept_RSO_join_request = require("./routes/accept_RSO_join_request.js");
 const deny_RSO_join_request = require("./routes/deny_RSO_join_request.js");
 const fetch_RSO_join_request = require("./routes/fetch_RSO_join_request.js");
 const leaverso = require("./routes/leaverso.js");
+const joinRso = require("./routes/request_to_join_RSO.js");
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -63,5 +64,6 @@ app.use("/accept_RSO_join_request", accept_RSO_join_request);
 app.use("/deny_RSO_join_request", deny_RSO_join_request);
 app.use("/fetch_RSO_join_request", fetch_RSO_join_request);
 app.use("/leaverso", leaverso);
+app.use("/request_to_join_RSO", joinRso);
 
 module.exports = db;
