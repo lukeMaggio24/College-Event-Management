@@ -3,7 +3,6 @@ import { Modal, Table } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Alert } from "react-bootstrap";
 
-
 function ViewRsoCreateRequests({ show, onHide }) {
   const [requests, setRequests] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -41,9 +40,8 @@ function ViewRsoCreateRequests({ show, onHide }) {
         UNI_id: request.UNI_id,
       }),
     });
-    if(response.ok)
-    {
-        handleDeny(request);
+    if (response.ok) {
+      handleDeny(request);
     }
   };
 
@@ -64,7 +62,7 @@ function ViewRsoCreateRequests({ show, onHide }) {
       const refreshData = await refreshResponse.json();
       setRequests(refreshData);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 
