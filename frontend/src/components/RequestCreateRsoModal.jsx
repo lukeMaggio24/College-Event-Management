@@ -70,12 +70,13 @@ function RequestCreateRsoModal({ show, onHide }) {
       return;
     }
 
+    const initialNumOfMembers = length + 1;
     const data = {
       user_id: localStorage.getItem("email"),
       rso_name: rsoName,
       administrator_email: adminEmail,
       emails: otherEmails,
-      initialNumOfMembers: length,
+      initialNumOfMembers: initialNumOfMembers,
       UNI_ID: universityID,
     };
 
