@@ -6,7 +6,7 @@ router.post("/", (req, res) => {
   const { rso_name, email } = req.body;
 
   const query =
-    "UPDATE rso SET member_emails = CONCAT(IFNULL(member_emails, ''), ?, ' ') WHERE rso_name = ?";
+    "UPDATE rso SET member_emails = CONCAT(IFNULL(member_emails, ''), '\n', ?, ' ') WHERE rso_name = ?";
 
   db.query(query, [email, rso_name], (error, results) => {
     if (error) {

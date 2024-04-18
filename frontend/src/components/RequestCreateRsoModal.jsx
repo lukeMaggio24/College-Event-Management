@@ -11,6 +11,7 @@ function RequestCreateRsoModal({ show, onHide }) {
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
+    console.log("test");
     e.preventDefault();
 
     if (!rsoName || !adminEmail || !universityName || !otherEmails) {
@@ -39,11 +40,13 @@ function RequestCreateRsoModal({ show, onHide }) {
     );
 
     const responseUniDomainJson = await responseUniDomain.json();
+    console.log(responseUniDomainJson + " uni domain <---");
     if (!responseUniDomainJson.university_domain) {
       setErrorMessage("Email domain not found");
       setShowAlert(true);
       return;
     }
+    console.log(responseUniDomainJson.university_domain + " uni domain <---");
     const uni_domain = responseUniDomainJson.university_domain.split("@")[1];
 
     const emails = otherEmails.split(/[\s,]+/);
@@ -70,13 +73,12 @@ function RequestCreateRsoModal({ show, onHide }) {
       return;
     }
 
-    const initialNumOfMembers = length + 1;
     const data = {
       user_id: localStorage.getItem("email"),
       rso_name: rsoName,
       administrator_email: adminEmail,
       emails: otherEmails,
-      initialNumOfMembers: initialNumOfMembers,
+      initialNumOfMembers: length,
       UNI_ID: universityID,
     };
 

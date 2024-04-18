@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
   const { email } = req.query;
   console.log(`Email: ${email}`); // This will print the email
 
+  // get all public and private events, and only get RSO events if the user is a member or admin of the RSO
   const query = `
   SELECT events.* 
   FROM events 
