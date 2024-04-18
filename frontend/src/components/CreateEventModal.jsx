@@ -73,6 +73,45 @@ function CreateEventModal({ show, onHide }) {
       latitude: lat,
     };
 
+    const userEmail = localStorage.getItem("email");
+if(eventVisibility === "RSO Event")
+{
+    const responseRSO = await fetch(
+      "http://localhost:3000/fetchrso?rso_name=" +
+        encodeURIComponent(rsoName)
+    );
+    const data2 = await responseRSO.json();
+
+    const adminEmail = data2[0].administrator_email;
+    console.log(data2);
+    console.log(adminEmail);
+    console.log(userEmail);
+
+      if(userEmail !== adminEmail)
+      {
+        setErrorMessage("You do not own this RSO");
+        setShowAlert(true);
+        return;
+      }
+  }
+
+
+    const responseTime = await fetch(
+      "http://localhost:3000/fetch_RSO_time?time=" +
+        encodeURIComponent(startTime)
+    );
+
+    const timeData = await responseTime.json();
+    console.log(timeData);
+    const otherEventTime = timeData.time;
+
+    if(otherEventTime === startTime)
+    {
+      setErrorMessage("Time Slot Already taken");
+      setShowAlert(true);
+      return;
+    }
+
     const response = await fetch("http://localhost:3000/createevent", {
       method: "POST",
       headers: {
