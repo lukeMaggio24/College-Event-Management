@@ -42,6 +42,9 @@ const fetch_RSO_join_request = require("./routes/fetch_RSO_join_request.js");
 const leaverso = require("./routes/leaverso.js");
 const fetch_RSO_time = require("./routes/fetch_RSO_time.js");
 const joinRso = require("./routes/request_to_join_RSO.js");
+const update_to_active = require("./routes/update_to_active.js");
+const update_to_inactive = require("./routes/update_to_inactive");
+const fetch_rso_numOfMembers = require("./routes/fetch_rso_numOfMembers.js");
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -67,5 +70,8 @@ app.use("/fetch_RSO_join_request", fetch_RSO_join_request);
 app.use("/leaverso", leaverso);
 app.use("/fetch_RSO_time", fetch_RSO_time);
 app.use("/request_to_join_RSO", joinRso);
+app.use("/update_to_active", update_to_active);
+app.use("/update_to_inactive", update_to_inactive);
+app.use("/fetch_rso_numOfMembers", fetch_rso_numOfMembers);
 
 module.exports = db;

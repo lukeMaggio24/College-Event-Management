@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
       }
 
       const updateQuery =
-        "UPDATE rso SET member_emails = ?, administrator_email = ? WHERE rso_name = ?";
+        "UPDATE rso SET numOfMembers = numOfMembers - 1, member_emails = ?, administrator_email = ? WHERE rso_name = ?";
       db.query(
         updateQuery,
         [rso.member_emails, rso.administrator_email, rsoName],

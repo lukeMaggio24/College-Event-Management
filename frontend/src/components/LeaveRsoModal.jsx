@@ -23,6 +23,22 @@ function LeaveRsoModal({ show, onHide }) {
         localStorage.getItem("email")
     );
 
+    const responseNumOfMembers = await fetch(
+      "http://localhost:3000/fetch_rso_numOfMembers?rso_name=" +
+        encodeURIComponent(rsoName)
+    );
+
+  if(responseNumOfMembers.numOfMembers === 5)
+  {
+      const activeResponse = await fetch("http://localhost:3000/update_to_inactive", {
+          method: "POST",
+          headers: { "Content-Type": "application/json"},
+          body: JSON.stringify({
+            rso_name: rsoName
+          }),
+        });
+  }
+
     const data = await response.json();
 
     if (
